@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdbool.h>
+
+#define DELIM " $\n"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -40,6 +43,16 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/*error funcs*/
+bool check_objc_file(char **av);
+bool check_arguments(int ac);
+
 /*file ops*/
 char *read_file(const char *filename);
+char **paaaarse(char* str);
+
+/*my functions*/
+void free_dp(char **command);
+int _atoi(char *s);
+
 #endif
