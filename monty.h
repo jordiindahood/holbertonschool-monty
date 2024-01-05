@@ -11,6 +11,8 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+#define UNUSED(x) (void)(x) /*macro function similar to unused attribute*/
+
 #define DELIM " $\n"
 
 /**
@@ -44,15 +46,27 @@ typedef struct instruction_s
 } instruction_t;
 
 /*error funcs*/
-bool check_objc_file(char **av);
-bool check_arguments(int ac);
+bool check_objc_file(char **);
+bool check_arguments(int);
 
 /*file ops*/
-char *read_file(const char *filename);
-char **paaaarse(char* str);
+char *read_file(const char *);
+char **paaaarse(char *);
+void run_the_script(char **);
+
+/*op functions*/
+void pushf(stack_t **stack, unsigned int line_number);
+void pallf(stack_t **stack, unsigned int line_number);
+void pintf(stack_t **stack, unsigned int line_number);
+void popf(stack_t **stack, unsigned int line_number);
+void swapf(stack_t **stack, unsigned int line_number);
+void addf(stack_t **stack, unsigned int line_number);
+void nopf(stack_t **stack, unsigned int line_number);
 
 /*my functions*/
-void free_dp(char **command);
-int _atoi(char *s);
+void free_dp(char **);
+int _atoi(char *);
+int check_for_functions(char **);
+int count_digits_or_chars(char *);
 
 #endif

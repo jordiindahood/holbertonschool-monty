@@ -10,7 +10,7 @@ char *read_file(const char *filename)
 	ssize_t n;
 	size_t len = 0;
 	char *buf = NULL;
-	char *tekst = NULL;
+	char *tmp = NULL, *tekst = NULL;
 
 	file = fopen(filename, "r");
 	n = getline(&buf, &len, file);
@@ -19,14 +19,18 @@ char *read_file(const char *filename)
 		free(buf), buf = NULL;
 		return (NULL);
 	}
-	tekst = malloc(strlen(buf)+1);
+	tekst = malloc(strlen(buf) + 1);
 	strcpy(tekst, buf);
-
 	free(buf), buf = NULL;
 
 	while (getline(&buf, &len, file) != -1)
 	{
-		tekst = realloc(tekst, len);
+		/*thanks to the checker, they dont want me to use realloc -_-*/
+		tmp = strdup(tekst);
+		free(tekst), tekst = NULL;
+		tekst = malloc(sizeof(tmp) + len);
+		strcpy(tekst, tmp);
+		free(tmp), tmp = NULL;
 		strcat(tekst, buf);
 		free(buf), buf = NULL;
 	}

@@ -1,7 +1,6 @@
 #include "monty.h"
 int main(int ac, char **av)
 {
-	int i = 0;
 	char *str;
 	char **script;
 
@@ -11,19 +10,16 @@ int main(int ac, char **av)
 
 	/*READ*/
 	str = read_file(av[1]);
-
 	/*PARSE*/
 	script = paaaarse(str);
 
-	/*TESTINGGGGG*/
-	while (script[i])
-	{
-		printf("----[%s]--{%d}--\n", script[i], i);
-		i++;
-	}
-	/*EXECUTION*/
+	/*pre-execution*/
+	check_for_functions(script);
 
+	/*EXECUTION*/
+	run_the_script(script);
 	/*FREEDOM IS RIGHT FOR EVERYONE, EVEN FOR POINTERS!!!*/
-	free_dp(script);
+	if (script)
+		free_dp(script), script = NULL;
 	return (EXIT_SUCCESS);
 }
