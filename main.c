@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	char **script;
 
 	/*Error: a monty file doesn't exist or hasn't met the required arguments*/
-	if (!check_arguments(ac) || !check_objc_file(av))
+	if (!check_arguments(ac) || !check_objc_file(av) || !av[1])
 		exit(EXIT_FAILURE);
 
 	/*READ*/
