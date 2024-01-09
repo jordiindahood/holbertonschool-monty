@@ -13,10 +13,15 @@ char *read_file(const char *filename)
 	char *tmp = NULL, *tekst = NULL;
 
 	file = fopen(filename, "r");
+	if (!file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		exit(EXIT_FAILURE);
+	}
 	n = getline(&buf, &len, file);
 	if (n == -1)
 	{
-		fprintf(stderr, "Error: Can't open file %s", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		free(buf), buf = NULL;
 		exit(EXIT_FAILURE);
 	}
