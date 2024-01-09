@@ -16,11 +16,9 @@ int main(int ac, char **av)
 
 	/*READ*/
 	str = read_file(av[1]);
+
 	/*PARSE*/
 	script = paaaarse(str);
-
-	/*pre-execution*/
-	check_for_functions(script);
 
 	/*EXECUTION*/
 	run_the_script(script);

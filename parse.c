@@ -41,6 +41,6 @@ char **paaaarse(char *str)
 		i++;
 	}
 	free(str), str = NULL;
-	command[i] = NULL;
+
 	return (command);
 }

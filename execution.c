@@ -2,12 +2,11 @@
 /**
  * check_for_functions - see if the script has no unknown functions
  * @script: char**
- * Return: -1
+ * Return: 1 ON SUCCESS, 0 ON FAIL
  */
-int check_for_functions(char **script)
+int check_for_functions(char *script)
 {
-	int i = 0, y, x = 0, index = 0;
-	char *ch;
+	int i = 0, y;
 	char *array[] = {"push",
 					 "pall",
 					 "pint",
@@ -17,35 +16,27 @@ int check_for_functions(char **script)
 					 "nop",
 					 NULL};
 
-	for (index = 0; script[index]; index++)
+	/*THIS FUNCTION ALLOWS ME TO SKIP THE NUMBERS*/
+	y = count_digits_or_chars(script);
+	if (y > 0)
+		return (-1);
+	if (y < 0)
 	{
-		/*THIS FUNCTION ALLOWS ME TO SKIP THE NUMBERS*/
-		/*(strings that has BOTH nums and chars are allowed)*/
-		y = count_digits_or_chars(script[index]);
-		if (y > 0)
-			x++;
-		if (y < 1)
-		{
-			/*NOTE: edit here if there is a necessity to output an error in case of*/
-			/*two consecutive cases of array that contains only integers*/
-			/*------------------------------------*/
-			/*trying to find the command in the array.*/
-			/*if it doesnt exist, return its position*/
-			for (i = 0; array[i]; i++)
-				if (strncmp(script[index], array[i], strlen(array[i])) == 0)
-					break;
-				else if (array[i + 1] == NULL)
-				{
-					/*error at some line*/
-					ch = script[index];
-					fprintf(stderr, "L%d: unknown instruction %s\n", index - x, ch);
-					free_dp(script);
-					exit(EXIT_FAILURE);
-				}
-		}
+		for (i = 0; array[i]; i++)
+			if (strncmp(script, array[i], strlen(array[i])) == 0)
+				return (1);
+		/**
+		 *else if (array[i + 1] == NULL)
+		 *{
+		 *	ch = script[index];
+		 *	fprintf(stderr, "L%d: unknown instruction %s\n", index - x, ch);
+		 *	free_dp(script);
+		 *	exit(EXIT_FAILURE);
+		 *}
+		 */
 	}
 	/*SUCCESS if all commands found*/
-	return (-1);
+	return (0);
 }
 /**
  * run_the_script - execution
@@ -54,6 +45,8 @@ int check_for_functions(char **script)
  */
 void run_the_script(char **script)
 {
+	char *ch;
+	int state;
 	stack_t *node = NULL;
 	instruction_t commands[] = {{"push", pushf},
 								{"pall", pallf},
@@ -72,6 +65,16 @@ void run_the_script(char **script)
 	}
 	for (index = 0; script[index]; index++)
 	{
+		state = check_for_functions(script[index]);
+		if (state == -1)
+			continue;
+		if (state == 0)
+		{
+			ch = script[index];
+			fprintf(stderr, "L%d: unknown instruction %s\n", index + 1, ch);
+			free_dp(script);
+			exit(EXIT_FAILURE);
+		}
 		for (i = 0; commands[i].opcode; i++)
 		{
 			if (strcmp(script[index], commands[0].opcode) == 0)
@@ -92,6 +95,5 @@ void run_the_script(char **script)
 				commands[i].f(&node, index + 1 - x);
 		}
 	}
-	free_stack(node), node = NULL;
-	free_dp(script), script = NULL;
+	free_stack(node), node = NULL, free_dp(script), script = NULL;
 }

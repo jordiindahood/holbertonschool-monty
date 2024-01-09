@@ -1,5 +1,5 @@
-#ifndef MONTYYYYY
-#define MONTYYYYY
+#ifndef MONTY
+#define MONTY
 /*DOUUBLE INCLUSION PROTECTION*/
 
 #include <stdio.h>
@@ -12,7 +12,6 @@
 #include <stdbool.h>
 
 #define UNUSED(x) (void)(x) /*macro function similar to unused attribute*/
-
 #define DELIM " $\n"
 
 /**
@@ -66,7 +65,7 @@ void nopf(stack_t **stack, unsigned int line_number);
 /*my functions*/
 void free_dp(char **);
 int _atoi(char *);
-int check_for_functions(char **);
+int check_for_functions(char *);
 int count_digits_or_chars(char *);
 void free_stack(stack_t *head);
 stack_t *create_node(int n);
