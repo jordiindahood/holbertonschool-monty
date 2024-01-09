@@ -68,5 +68,7 @@ void free_dp(char **);
 int _atoi(char *);
 int check_for_functions(char **);
 int count_digits_or_chars(char *);
+void free_stack(stack_t *head);
+stack_t *create_node(int n);
 
 #endif

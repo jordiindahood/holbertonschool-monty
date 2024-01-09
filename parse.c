@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
- * hsh_parse- convert string to array of strings
- * @line: char
+ * paaaarse- convert string to array of strings
+ * @str: char *
  * Return: **char
  */
-char **paaaarse(char* str)
+char **paaaarse(char *str)
 {
 	char *token, *delim = DELIM, *tmp = NULL, **command = NULL;
 	int count = 0, i = 0;

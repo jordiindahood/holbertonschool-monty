@@ -1,4 +1,10 @@
 #include "monty.h"
+/**
+ * main - entry point
+ * @av: char**
+ * @ac: int
+ * Return: 0
+ */
 int main(int ac, char **av)
 {
 	char *str;
@@ -18,8 +24,6 @@ int main(int ac, char **av)
 
 	/*EXECUTION*/
 	run_the_script(script);
-	/*FREEDOM IS RIGHT FOR EVERYONE, EVEN FOR POINTERS!!!*/
-	if (script)
-		free_dp(script), script = NULL;
+
 	return (EXIT_SUCCESS);
 }

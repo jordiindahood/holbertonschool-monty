@@ -10,8 +10,7 @@ int _atoi(char *s)
 	unsigned int res = 0;
 	int sign = 1;
 
-	do
-	{
+	do {
 		if (*s == '-')
 			sign *= -1;
 		else if (*s >= '0' && *s <= '9')
@@ -22,7 +21,7 @@ int _atoi(char *s)
 	return (res * sign);
 }
 /**
- * _isdigit - count characters
+ * count_digits_or_chars - count characters
  * @c: char*
  * Return:
  * - pos if only digits,
