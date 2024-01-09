@@ -16,7 +16,7 @@ char *read_file(const char *filename)
 	n = getline(&buf, &len, file);
 	if (n == -1)
 	{
-		fprintf(stderr,"Error: Can't open file %s",filename);
+		fprintf(stderr, "Error: Can't open file %s", filename);
 		free(buf), buf = NULL;
 		return (NULL);
 	}
