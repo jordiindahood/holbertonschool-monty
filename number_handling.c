@@ -32,6 +32,10 @@ int count_digits_or_chars(char *c)
 {
 	int i, digits = 0, chars = 0;
 
+	c = strtok(c, DELIM);
+	if (!c)
+		return (0);
+
 	for (i = 0; c[i]; i++)
 		if (c[i] >= '0' && c[i] <= '9')
 			digits++;

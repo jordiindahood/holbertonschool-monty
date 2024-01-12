@@ -12,7 +12,7 @@
 #include <stdbool.h>
 
 #define UNUSED(x) (void)(x) /*macro function similar to unused attribute*/
-#define DELIM " $\n"
+#define DELIM " \t\n$"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -45,7 +45,6 @@ typedef struct instruction_s
 } instruction_t;
 
 /*error funcs*/
-bool check_objc_file(char **);
 bool check_arguments(int);
 
 /*file ops*/
@@ -69,5 +68,6 @@ int check_for_functions(char *);
 int count_digits_or_chars(char *);
 void free_stack(stack_t *head);
 stack_t *create_node(int n);
+int _strlen(char *);
 
 #endif

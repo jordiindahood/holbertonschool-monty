@@ -23,7 +23,7 @@ char *read_file(const char *filename)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		free(buf), buf = NULL;
-		exit(EXIT_FAILURE);
+		fclose(file), exit(EXIT_FAILURE);
 	}
 	tekst = malloc(strlen(buf) + 1);
 	strcpy(tekst, buf);

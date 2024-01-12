@@ -6,41 +6,44 @@
  */
 char **paaaarse(char *str)
 {
-	char *token, *delim = DELIM, *tmp = NULL, **command = NULL;
+	char *token, *delim = "\n", *tmp = NULL, **command = NULL;
 	int count = 0, i = 0;
 
 	if (!str)
 		return (NULL);
 	tmp = strdup(str);
 	token = strtok(tmp, delim);
-	if (token == NULL)
-	{
-		free(str), str = NULL;
-		free(tmp), tmp = NULL;
-		return (NULL);
-	}
 
 	while (token)
 	{
 		count++;
 		token = strtok(NULL, delim);
 	}
-	free(tmp), tmp = NULL;
-	command = malloc(sizeof(char *) * (count + 1));
-	if (!command)
+	command = (char **)malloc(sizeof(char *) * count);
+	if (command == NULL)
 	{
-		free(str), str = NULL;
-		return (NULL);
+		free(str);
+		perror("Memory allocation error\n");
+		exit(EXIT_FAILURE);
 	}
-
 	token = strtok(str, delim);
-	while (token)
+	command[i] = (char *)malloc(_strlen(token) + 1);
+	if (command[i] == NULL)
 	{
-		command[i] = strdup(token);
+		free_dp(command), command = NULL;
+		perror("Memory allocation error\n");
+		exit(EXIT_FAILURE);
+	}
+	command[i] = strdup(token);
+	for (i = 1; i < count; i++)
+	{
 		token = strtok(NULL, delim);
-		i++;
+		command[i] = (char *)malloc(_strlen(token) + 1);
+
+		if (command[i] == NULL)
+			perror("Memory allocation error\n"), exit(EXIT_FAILURE);
+		command[i] = strdup(token);
 	}
 	free(str), str = NULL;
-
 	return (command);
 }
