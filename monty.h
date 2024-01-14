@@ -30,13 +30,12 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 /**
- * struct bus_s - variables -args, file, line content
+ * struct data_s - global vars struct
  * @arg: value
  * @file: pointer to monty file
  * @content: line content
- * Description: carries values through the program
  */
-typedef struct data
+typedef struct data_s
 {
 	char *arg;
 	FILE *file;

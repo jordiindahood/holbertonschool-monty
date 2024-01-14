@@ -1,8 +1,8 @@
 #include "monty.h"
 /**
  * pushf - push element to the stack
- * @node: stack**
- * @n: unsigned
+ * @head: stack**
+ * @line: unsigned
  * Return: void
  */
 void pushf(stack_t **head, unsigned int line)
@@ -72,7 +72,7 @@ void free_stack(stack_t *head)
 }
 /**
  * pintf - print the value of top of the stack
- * @stack: stack**
+ * @head: stack**
  * @line_number: unsigned
  * Return: void
  */

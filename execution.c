@@ -2,6 +2,9 @@
 /**
  * run_the_script - execution
  * @script: char**
+ * @line: int
+ * @file: FILE*
+ * @head: stack **
  * Return: void
  */
 int run_the_script(char *script, int line, FILE *file, stack_t **head)
