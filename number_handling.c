@@ -10,7 +10,8 @@ int _atoi(char *s)
 	unsigned int res = 0;
 	int sign = 1;
 
-	do {
+	do
+	{
 		if (*s == '-')
 			sign *= -1;
 		else if (*s >= '0' && *s <= '9')
@@ -37,10 +38,14 @@ int count_digits_or_chars(char *c)
 		return (0);
 
 	for (i = 0; c[i]; i++)
+	{
+		if (c[i] == '-' && i == 0)
+			continue;
 		if (c[i] >= '0' && c[i] <= '9')
 			digits++;
 		else
 			chars++;
+	}
 
 	/*only digits*/
 	if (digits > 0 && chars == 0)

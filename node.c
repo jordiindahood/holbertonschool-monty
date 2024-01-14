@@ -9,8 +9,11 @@ void pushf(stack_t **head, unsigned int line)
 {
 	int n;
 	stack_t *node;
+	char *arg;
 
-	if (global.arg == NULL || count_digits_or_chars(global.arg) < 0)
+	arg = strtok(global.arg, " \n\t$");
+
+	if (arg == NULL || count_digits_or_chars(global.arg) < 1)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line);
 		fclose(global.file);
