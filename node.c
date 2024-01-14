@@ -78,16 +78,12 @@ void free_stack(stack_t *head)
  */
 void pintf(stack_t **head, unsigned int line_number)
 {
-	stack_t *tmp;
-
-	(void)line_number;
-	if (!head)
+	if (*head == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fclose(global.file), free(global.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	if (head == NULL)
-		exit(EXIT_FAILURE);
-	tmp = *head;
-	printf("%d\n", tmp->n);
+	printf("%d\n", (*head)->n);
 }
