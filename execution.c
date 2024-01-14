@@ -20,10 +20,10 @@ int run_the_script(char *script, int line, FILE *file, stack_t **head)
 	int i = 0;
 	char *func;
 
-	func = strtok(script, " $\n\t");
+	func = strtok(script, " \n\t");
 	if (func && func[0] == '#')
 		return (0);
-	global.arg = strtok(NULL, " $\n\t");
+	global.arg = strtok(NULL, " \n\t");
 	while (commands[i].opcode && func)
 	{
 		if (strcmp(func, commands[i].opcode) == 0)
