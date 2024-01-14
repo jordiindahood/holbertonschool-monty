@@ -1,27 +1,36 @@
 #include "monty.h"
-stack_t *stk = NULL;
 /**
  * pushf - push element to the stack
  * @node: stack**
  * @n: unsigned
  * Return: void
  */
-void pushf(stack_t **node, unsigned int n)
+void pushf(stack_t **head, unsigned int line)
 {
-	stack_t *tmp;
+	int n;
+	stack_t *node;
 
-	UNUSED(n);
-	if (stk == NULL)
+	if (global.arg == NULL || count_digits_or_chars(global.arg) < 0)
 	{
-		stk = *node;
+		fprintf(stderr, "L%d: usage: push integer\n", line);
+		fclose(global.file);
+		free(global.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	n = _atoi(global.arg);
+	node = create_node(n);
+
+	if (*head == NULL)
+	{
+		*head = node;
 		return;
 	}
-	tmp = stk;
-
-	stk = *node;
-	stk->next = tmp;
-	tmp->prev = stk;
+	node->next = (*head);
+	(*head)->prev = node;
+	*head = node;
 }
+
 /**
  * create_node - create a node and give it a value
  * @n: int
@@ -37,6 +46,9 @@ stack_t *create_node(int n)
 		exit(EXIT_FAILURE);
 	}
 	node->n = n;
+	node->next = NULL;
+	node->prev = NULL;
+
 	return (node);
 }
 /**
@@ -46,10 +58,13 @@ stack_t *create_node(int n)
  */
 void free_stack(stack_t *head)
 {
-	if (head)
+	stack_t *tmp;
+
+	while (head)
 	{
-		free_stack(head->next);
-		free(head);
+		tmp = head;
+		head = head->next;
+		free(tmp);
 	}
 }
 /**
@@ -58,18 +73,18 @@ void free_stack(stack_t *head)
  * @line_number: unsigned
  * Return: void
  */
-void pintf(stack_t **stack, unsigned int line_number)
+void pintf(stack_t **head, unsigned int line_number)
 {
 	stack_t *tmp;
 
 	(void)line_number;
-	if (!stk)
+	if (!head)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	if (stack == NULL)
+	if (head == NULL)
 		exit(EXIT_FAILURE);
-	tmp = *stack;
+	tmp = *head;
 	printf("%d\n", tmp->n);
 }

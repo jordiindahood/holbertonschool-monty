@@ -29,7 +29,20 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-
+/**
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @content: line content
+ * Description: carries values through the program
+ */
+typedef struct data
+{
+	char *arg;
+	FILE *file;
+	char *content;
+} data_t;
+extern data_t global;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -48,9 +61,8 @@ typedef struct instruction_s
 bool check_arguments(int);
 
 /*file ops*/
-char *read_file(const char *);
-char **paaaarse(char *);
-void run_the_script(char **);
+int *read_file(const char *);
+int run_the_script(char *, int, FILE *, stack_t **);
 
 /*op functions*/
 void pushf(stack_t **stack, unsigned int line_number);
@@ -64,7 +76,6 @@ void nopf(stack_t **stack, unsigned int line_number);
 /*my functions*/
 void free_dp(char **);
 int _atoi(char *);
-int check_for_functions(char *);
 int count_digits_or_chars(char *);
 void free_stack(stack_t *head);
 stack_t *create_node(int n);

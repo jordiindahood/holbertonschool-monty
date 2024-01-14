@@ -7,22 +7,12 @@
  */
 int main(int ac, char **av)
 {
-	char *str;
-	char **script;
-
 	/*Error: a monty file doesn't exist or hasn't met the required arguments*/
 	if (!check_arguments(ac))
 		exit(EXIT_FAILURE);
 
-	/*READ*/
-	str = read_file(av[1]);
-	if (!str)
-		return (EXIT_SUCCESS);
-	/*PARSE*/
-	script = paaaarse(str);
-
-	/*EXECUTION*/
-	run_the_script(script);
+	/*START EXECUTION*/
+	read_file(av[1]);
 
 	return (EXIT_SUCCESS);
 }

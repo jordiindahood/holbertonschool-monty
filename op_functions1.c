@@ -10,13 +10,11 @@ void pallf(stack_t **stack, unsigned int line_number)
 	stack_t *tmp;
 
 	UNUSED(line_number);
-
-	if (stack == NULL)
+	tmp = *stack;
+	if (tmp == NULL)
 		return;
 
-	tmp = *stack;
-
-	while (tmp != NULL)
+	while (tmp)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
